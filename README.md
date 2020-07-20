@@ -1,6 +1,6 @@
 **Code for HTTP API which provides database access to chatbot**
 
-Chatbot is located [here](https://www.facebook.com/Test-110486047413100/).
+Chatbot is located at [this](https://www.facebook.com/Test-110486047413100/) facebook page.
 
 Chatbot is built using ChatFuel.
 
