@@ -14,7 +14,9 @@ let db=new sqlite3.Database('./food.db',(err) => {
 
 router.get('/', (req, res) => {
     //Redirect to the app if user tries to reach the endpoint
-    return res.status(301).redirect('https://rahuls.github.io/app');
+    res.send('Hi! This is an API endpoint for chatbot');
+    return res;
+    
 });
 
 
