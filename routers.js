@@ -14,30 +14,10 @@ let db=new sqlite3.Database('./food.db',(err) => {
 
 router.get('/', (req, res) => {
     //Redirect to the app if user tries to reach the endpoint
-    res.send('Hi! This is an API endpoint for chatbot');
+    res.send(`Hi! This is an API endpoint for chatbot's database`);
     return res;
     
 });
-
-
-router.get('/:surl', (req, res) => {
-    //Get the long URL for the short URL
-    let path=req.originalUrl;
-    path=path.slice(1);
-    
-    let sql = 'select lurl from urls where surl = ?';
-    db.get(sql,[path],(err,row) => {
-      if(err){
-        return console.error(err.message);
-      }
-      if(row){
-        return res.status(301).redirect(setHttp(row.lurl));
-      }else{
-        return res.status(400).json("The short url doesn't exists in our system.");
-      }
-    });
-});
-
 
 router.post('/', (req, res) => {
     let status = req.body.status;
@@ -55,13 +35,15 @@ router.post('/', (req, res) => {
             "text" : `Order Succesful! Your order id is ${orderid}`
         }]});
     }
-    else if(status==2){ //The user want to check for details
+    else if(status==2){ 
+        //The user want to check for details
         let orderid = req.body.orderid;
         let sql = 'select dstatus from orders where orderid = ?';
         db.get(sql,[orderid],(err,row) => {
             if(err){
               console.log(err.message);
             }
+
             if(row){
                 return res.json({'messages': [{
                     "text" : `Your order delivery status is ${row.dstatus}`
