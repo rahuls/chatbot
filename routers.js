@@ -51,7 +51,7 @@ router.post('/', (req, res) => {
         let itemid = req.body.itemid;
         let sql = "INSERT INTO orders(orderid,itemid,dstatus) VALUES('"+orderid+"','"+itemid+"','"+dstatus+"')";
         db.run(sql)
-        return res.json({'message': [{
+        return res.json({'messages': [{
             "text" : `Order Succesful! Your order id is ${orderid}`
         }]});
     }
@@ -63,11 +63,11 @@ router.post('/', (req, res) => {
               console.log(err.message);
             }
             if(row){
-                return res.json({'message': [{
+                return res.json({'messages': [{
                     "text" : `Your order delivery status is ${row.dstatus}`
                 }]});
             }else{
-                return res.json({'message': [{
+                return res.json({'messages': [{
                     "text" : `Sorry your Order ID is Invalid`
                 }]});
             }
