@@ -1,0 +1,27 @@
+{
+  "type": "module",
+  "name": "chatbot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rahuls/chatbot.git"
+  },
+  "author": "Rahul Sudhanaboina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rahuls/chatbot/issues"
+  },
+  "homepage": "https://github.com/rahuls/chatbot#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "randomstring": "^1.1.5",
+    "sqlite3": "^5.0.0"
+  }
+}
