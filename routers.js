@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
         let sql = "INSERT INTO orders(orderid,itemid,dstatus) VALUES('"+orderid+"','"+itemid+"','"+dstatus+"')";
         db.run(sql)
         return res.json({'message': [{
-            "text" : `"Order Succesful! Your order id is ${orderid}"`
+            "text" : `Order Succesful! Your order id is ${orderid}`
         }]});
     }
     else if(status==2){ //The user want to check for details
@@ -64,11 +64,11 @@ router.post('/', (req, res) => {
             }
             if(row){
                 return res.json({'message': [{
-                    "text" : `"Your order delivery status is ${row.dstatus}"`
+                    "text" : `Your order delivery status is ${row.dstatus}`
                 }]});
             }else{
                 return res.json({'message': [{
-                    "text" : `"Sorry your Order ID is Invalid"`
+                    "text" : `Sorry your Order ID is Invalid`
                 }]});
             }
           });
@@ -81,3 +81,5 @@ router.get('*',(req,res) => {
 })
 
 export default router;
+
+// https://nameless-hollows-14750.herokuapp.com
