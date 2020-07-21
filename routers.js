@@ -13,37 +13,39 @@ let db=new sqlite3.Database('./food.db',(err) => {
 });
 
 router.get('/', (req, res) => {
-    //Redirect to the app if user tries to reach the endpoint
+    //If user opens the endpoint in browser
     res.send(`Hi! This is an API endpoint for chatbot's database`);
     return res;
     
 });
 
 router.post('/', (req, res) => {
-    let status = req.body.status;
-    //Create an order and insert into the table
+    let status = req.body.status; //This is used to check whether user wants to place an 
+    //order or to check for delivery status
+    
     if(status==1){
+        //The user wants to place an order
         let orderid = randomstring.generate({
             length: 4,
             charset: 'numeric'
         });
         let dstatus='Not Delivered. Under Preparation';
         let itemid = req.body.itemid;
-        let sql = "INSERT INTO orders(orderid,itemid,dstatus) VALUES('"+orderid+"','"+itemid+"','"+dstatus+"')";
+        let sql = `INSERT INTO orders(orderid,itemid,dstatus) VALUES('${orderid},${itemid},${dstatus}');`
+        
         db.run(sql)
         return res.json({'messages': [{
             "text" : `Order Succesful! Your order id is ${orderid}`
         }]});
     }
-    else if(status==2){ 
-        //The user want to check for details
+    else if(status==2){ //
+        //The user want to check for delivery status
         let orderid = req.body.orderid;
-        let sql = 'select dstatus from orders where orderid = ?';
+        let sql = 'SELECT dstatus FROM orders WHERE orderid = ?';
         db.get(sql,[orderid],(err,row) => {
             if(err){
               console.log(err.message);
             }
-
             if(row){
                 return res.json({'messages': [{
                     "text" : `Your order delivery status is ${row.dstatus}`
@@ -53,13 +55,15 @@ router.post('/', (req, res) => {
                     "text" : `Sorry your Order ID is Invalid`
                 }]});
             }
-          });
+        });
     }
 });
 
 router.get('*',(req,res) => {
-    //If user tries to reach an unknown path 
-    return res.send('Invalid URL');
+    //If there is a request to a path 
+    return res.json({
+        'message' : `Path doesn't exists`
+    });
 })
 
 export default router;

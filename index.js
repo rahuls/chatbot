@@ -1,15 +1,13 @@
 import express from 'express';
 import 'dotenv/config.js';
-import cors from 'cors';
 const app = express();
 import router from './routers.js'
 
 
 app.use(express.json());       // to support JSON-encoded bodies
-app.use(express.urlencoded()); // to support URL-encoded bodies
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*")
-  res.header("Access-Control-Allow-Headers", "content-type")
+  res.header("Access-Control-Allow-Headers", "Content-Type")
   next();
 })
 app.use('/',router)
